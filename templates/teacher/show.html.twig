@@ -1,0 +1,42 @@
+<img src="{{ asset('image/source.gif') }}" alt="bababa" height="200px" width="200px">
+<a href="{{ path('showTeacher') }}">showTeacher</a>
+<h1  style="color: rebeccapurple">show Teacher</h1>
+
+{% if  tabformation is empty %}
+    <h3>Pas de formation</h3>
+    {% else %}
+<table border="1">
+    <tr>
+        <td>Ref</td>
+        <td>Titre</td>
+        <td>Desc</td>
+        <td>DD</td>
+        <td>Nbr participant</td>
+        <td>Action</td>
+    </tr>
+
+    {% for formation in tabformation %}
+        <tr>
+            <td>{{ formation.ref }}</td>
+            <td>{{ formation.Titre|upper }}</td>
+            <td>{{ formation.Description }}</td>
+            <td>{{ formation.date_debut }}</td>
+            <td>{{ formation.nb_participants }}</td>
+            <td>
+                {% if formation.nb_participants !=0 %}
+                <a href="{{ path('showFormation',{'Ref':formation.ref}) }}"
+                     >participer</a>
+
+
+                {% else %}
+                sold out
+                    {% endif %}
+                </td>
+
+        </tr>
+
+    {% endfor %}
+</table>
+{% endif %}
+    <h3>Nbr de formation {{ tabformation|length }}</h3>
+
