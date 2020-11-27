@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70505d87-b20d-463e-a6f7-1a024a265c39" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201127191115.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20201127191115.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +151,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606499236993</updated>
-      <workItem from="1606499238940" duration="3988000" />
+      <workItem from="1606499238940" duration="4594000" />
     </task>
     <servers />
   </component>

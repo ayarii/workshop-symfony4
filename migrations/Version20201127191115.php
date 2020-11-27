@@ -19,6 +19,7 @@ final class Version20201127191115 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
+
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE category (ref INT NOT NULL, name VARCHAR(100) DEFAULT NULL, PRIMARY KEY(ref)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
