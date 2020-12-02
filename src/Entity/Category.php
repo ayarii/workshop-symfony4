@@ -2,6 +2,8 @@
 
 
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,14 +13,25 @@ class Category
 {
     /**
      * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $ref;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -39,17 +52,43 @@ class Category
     /**
      * @return mixed
      */
-    public function getRef()
+    public function getId()
     {
-        return $this->ref;
+        return $this->id;
     }
 
     /**
-     * @param mixed $ref
+     * @return Collection|Product[]
      */
-    public function setRef($ref): void
+    public function getProducts(): Collection
     {
-        $this->ref = $ref;
+        return $this->products;
     }
 
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return(string)$this->getName();
+    }
 }

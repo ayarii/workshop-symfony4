@@ -1,25 +1,29 @@
-<a href="{{path('addProduct')}}">Add</a>
+<a href="{{ path('addProduct') }}">Add</a>
 
 <table border="1">
-<tr>
-    <td>Id</td>
-    <td>Nom</td>
-    <td>Settings</td>
-</tr>
-{% for product in listProducts %}
-<tr>
-    <td>
-    {{product.id}}
-    </td>
-    <td>
-    {{product.name}}
-    </td>
-    <td><a href="{{path('updateProduct',{'id':product.id}) }}">Update</a>
-        <a href="{{path('removeProduct',{'id':product.id}) }}">Delete</a>
-        <a href="{{path('showProduct',{'id':product.id}) }}">Show</a>
-    </td>
-</tr>
-{%endfor%}
+    <tr>
+        <td>Id</td>
+        <td>Nom</td>
+        <td>Category</td>
+        <td>Settings</td>
+    </tr>
+    {% for product in listProducts %}
+        <tr>
+            <td>
+                {{ product.id }}
+            </td>
+            <td>
+                {{ product.name }}
+            </td>
+            <td>
+            {{ product.category }}
+            </td>
+            <td><a href="{{ path('updateProduct',{'id':product.id}) }}">Update</a>
+                <a href="{{ path('removeProduct',{'id':product.id}) }}">Delete</a>
+                <a href="{{ path('showProduct',{'id':product.id}) }}">Show</a>
+            </td>
+        </tr>
+    {% endfor %}
 </table>
 
 
