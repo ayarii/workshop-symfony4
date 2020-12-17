@@ -47,4 +47,21 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function sortByPrice()
+    {
+        $em=$this->getEntityManager();
+        $qr=$em->createQuery("SELECT p FROM App\Entity\Product p ORDER BY p.price ASC");
+        return $qr->getResult();
+    }
+
+    public function orderByPriceQb()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.price', 'DESC')
+            ->setMaxResults(2)
+            ->where('p.name LIKE :name')
+            ->setParameter('name' , '%u%')
+            ->getQuery()->getResult();
+    }
 }
