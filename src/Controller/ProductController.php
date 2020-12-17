@@ -88,4 +88,15 @@ class ProductController extends AbstractController
         }
         return $this->render("product/updateProduct.html.twig",array('formProduct'=>$formProduct->createView()));
     }
+    /**
+     * @Route("/sortByPrice", name="sortByPrice")
+     */
+    public function sortByPrice()
+    {
+        //$products = $this->getDoctrine()->getRepository(Product::class)->sortByPrice();
+        $products = $this->getDoctrine()->getRepository(Product::class)->orderByPriceQb();
+        return $this->render("product/sortByPrice.html.twig",array('listProducts'=>$products));
+    }
+
+
 }
