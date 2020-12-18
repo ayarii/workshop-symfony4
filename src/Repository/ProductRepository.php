@@ -61,7 +61,24 @@ class ProductRepository extends ServiceEntityRepository
             ->orderBy('p.price', 'DESC')
             ->setMaxResults(2)
             ->where('p.name LIKE :name')
-            ->setParameter('name' , '%u%')
+            ->setParameter('name' , '%u')
             ->getQuery()->getResult();
+    }
+
+
+    public function search($name)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :name')
+            ->setParameter('name' , $name)
+            ->getQuery()->getResult();
+    }
+
+    public function enabledProduct(){
+        $qb= $this->createQueryBuilder('p');
+        $qb ->where('p.enabled=:enabled');
+        $qb->setParameter('enabled',true);
+        return $qb->getQuery()->getResult();
+
     }
 }

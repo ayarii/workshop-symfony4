@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +26,19 @@ class ProductController extends AbstractController
     /**
      * @Route("/list", name="listProduct")
      */
-    public function listProduct()
+    public function listProduct(Request $request)
     {
         //return new Response("La liste des produits");
         $products=$this->getDoctrine()->getRepository(Product::class)->findAll();
-        return $this->render("product/listProducts.html.twig",array('listProducts'=>$products));
+        $enabledProduct= $this->getDoctrine()->getRepository(Product::class)->enabledProduct();
+        $formSearch= $this->createForm(SearchProductType::class);
+        $formSearch->handleRequest($request);
+        if($formSearch->isSubmitted()){
+            $name= $formSearch->getData()->getName();
+            $SearchProducts = $this->getDoctrine()->getRepository(Product::class)->search($name);
+            return $this->render("product/listProducts.html.twig",array('listProducts'=>$SearchProducts,'searchForm'=>$formSearch->createView()));
+        }
+        return $this->render("product/listProducts.html.twig",array('enabledProduct'=>$enabledProduct,'listProducts'=>$products,'searchForm'=>$formSearch->createView()));
 
     }
 

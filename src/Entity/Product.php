@@ -33,14 +33,14 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    private $adress;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabled;
 
     public function getId(): ?int
     {
@@ -91,6 +91,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

@@ -1,5 +1,38 @@
+{{ form(searchForm) }}
 <a href="{{ path('addProduct') }}">Add</a>
+<h1>Enabled Product</h1>
 
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Nom</td>
+        <td>Enabled</td>
+        <td>Category</td>
+        <td>Settings</td>
+    </tr>
+    {% for product in enabledProduct %}
+        <tr>
+            <td>
+                {{ product.id }}
+            </td>
+            <td>
+                {{ product.name }}
+            </td>
+            <td>
+                {{ product.enabled }}
+            </td>
+            <td>
+                {{ product.category }}
+            </td>
+            <td><a href="{{ path('updateProduct',{'id':product.id}) }}">Update</a>
+                <a href="{{ path('removeProduct',{'id':product.id}) }}">Delete</a>
+                <a href="{{ path('showProduct',{'id':product.id}) }}">Show</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<h1>App Pro</h1>
 <table border="1">
     <tr>
         <td>Id</td>
