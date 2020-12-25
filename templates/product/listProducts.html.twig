@@ -1,4 +1,9 @@
-{{ form(searchForm) }}
+{%  extends 'base.html.twig' %}
+{% block title %} List Product {% endblock %}
+{% block body %}
+    {% block breadcrumbs %} Products{% endblock %}
+
+    {{ form(searchForm) }}
 <a href="{{ path('addProduct') }}">Add</a>
 <h1>Enabled Product</h1>
 
@@ -59,4 +64,5 @@
     {% endfor %}
 </table>
 
+{% endblock %}
 
