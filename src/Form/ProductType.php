@@ -19,6 +19,8 @@ class ProductType extends AbstractType
             ->add('category')
             ->add('enabled')
            # ->add('submit',SubmitType::class)
+           ->add('submit',SubmitType::class,
+               ['attr'=>['formnovalidate'=>'formnovalidate']])
         ;
     }
 

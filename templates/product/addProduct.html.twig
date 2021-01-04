@@ -1,21 +1,27 @@
 {% extends 'base.html.twig' %}
 {% block title %}Add Product {% endblock %}
 {% block body %}
+    <style>
+        ul li{color: orangered}
+    </style>
     {% block breadcrumbs %}  Add Product{% endblock %}
 {#{{form(formProduct)}}#}
     <div class="col-lg-6">
     {{ form_start(formProduct) }}
      {{ form_label(formProduct.name, 'Name') }}
     {{ form_widget(formProduct.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(formProduct.name ) }}
         {{ form_label(formProduct.price, 'Price') }}
     {{ form_widget(formProduct.price, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(formProduct.price ) }}
         {{ form_label(formProduct.description, 'Description') }}
     {{ form_widget(formProduct.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(formProduct.description , {'attr': {'class': 'error'}}) }}
         {{ form_label(formProduct.category, 'category') }}
     {{ form_widget(formProduct.category, {'attr': {'class': 'form-control'}}) }}
         {{ form_label(formProduct.enabled, 'enabled') }}
     {{ form_widget(formProduct.enabled, {'attr': {'class': 'form-control'}}) }}
-        <div class="text-center"><button type="submit" class="btn-success">Add Product</button></div>
+{#        <div class="text-center"><button type="submit" class="btn-success">Add Product</button></div>#}
     {{ form_end(formProduct) }}
     </div>
 {% endblock %}
