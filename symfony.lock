@@ -81,6 +81,12 @@
     "egulias/email-validator": {
         "version": "2.1.24"
     },
+    "knplabs/knp-components": {
+        "version": "v3.0.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.4.2"
+    },
     "monolog/monolog": {
         "version": "1.25.5"
     },
@@ -89,6 +95,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "php": {
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"

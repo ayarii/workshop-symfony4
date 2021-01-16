@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SearchProductType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,19 +27,24 @@ class ProductController extends AbstractController
     /**
      * @Route("/list", name="listProduct")
      */
-    public function listProduct(Request $request)
+    public function listProduct(Request $request, PaginatorInterface $paginator)
     {
         //return new Response("La liste des produits");
         $products=$this->getDoctrine()->getRepository(Product::class)->findAll();
         $enabledProduct= $this->getDoctrine()->getRepository(Product::class)->enabledProduct();
         $formSearch= $this->createForm(SearchProductType::class);
         $formSearch->handleRequest($request);
+        //pagination
+        $allProducts = $paginator->paginate(
+            $products, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), 2 // Nombre de résultats par page
+        );
         if($formSearch->isSubmitted()){
             $name= $formSearch->getData()->getName();
             $SearchProducts = $this->getDoctrine()->getRepository(Product::class)->search($name);
             return $this->render("product/listProducts.html.twig",array('listProducts'=>$SearchProducts,'searchForm'=>$formSearch->createView()));
         }
-        return $this->render("product/listProducts.html.twig",array('enabledProduct'=>$enabledProduct,'listProducts'=>$products,'searchForm'=>$formSearch->createView()));
+        return $this->render("product/listProducts.html.twig",array('enabledProduct'=>$enabledProduct,'listProducts'=>$allProducts,'searchForm'=>$formSearch->createView()));
 
     }
 
